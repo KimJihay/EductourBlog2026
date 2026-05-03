@@ -18,6 +18,11 @@ body {
   scroll-behavior: smooth;
 }
 
+/* FIX FOR IMAGE_F01755.JPG: Prevent body scroll when modal is active */
+body.modal-open {
+  overflow: hidden;
+}
+
 /* Custom Scrollbar Hide for Nav */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
@@ -28,7 +33,7 @@ body {
   scrollbar-width: none; /* Firefox */
 }
 
-/* Base image styling */
+/* Image behavior */
 img {
   user-select: none;
   -webkit-user-drag: none;
