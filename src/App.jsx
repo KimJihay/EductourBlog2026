@@ -206,16 +206,15 @@ const ModalMediaGallery = ({ items }) => {
         </motion.div>
       </AnimatePresence>
 
-      {/* RESTORED NAVIGATION BUTTONS */}
       <button 
         onClick={prev} 
-        className="absolute left-4 md:left-6 z-[130] p-3 md:p-4 rounded-full bg-black/50 text-white hover:text-[#10b981] backdrop-blur-md opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity border border-white/10"
+        className="absolute left-4 md:left-6 z-[130] p-3 md:p-4 rounded-full bg-black/50 text-white hover:text-[#10b981] backdrop-blur-md transition-opacity border border-white/10"
       >
         <ArrowLeft size={24} />
       </button>
       <button 
         onClick={next} 
-        className="absolute right-4 md:right-6 z-[130] p-3 md:p-4 rounded-full bg-black/50 text-white hover:text-[#10b981] backdrop-blur-md opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity border border-white/10"
+        className="absolute right-4 md:right-6 z-[130] p-3 md:p-4 rounded-full bg-black/50 text-white hover:text-[#10b981] backdrop-blur-md transition-opacity border border-white/10"
       >
         <ArrowRight size={24} />
       </button>
@@ -248,19 +247,21 @@ const CompanyModal = ({ company, onClose }) => {
           <X size={28} />
         </button>
 
-        <div className="w-full md:w-1/3 p-10 md:p-16 overflow-y-auto border-b md:border-b-0 md:border-r border-white/10 flex flex-col items-center text-center">
-          <div className="mt-4 h-32 w-32 bg-white rounded-3xl p-4 flex items-center justify-center flex-shrink-0 shadow-2xl mb-10">
+        {/* --- LEFT SECTION (TEXT) --- */}
+        <div className="w-full h-1/2 md:h-full md:w-1/3 p-8 md:p-16 overflow-y-auto border-b md:border-b-0 md:border-r border-white/10 flex flex-col items-center text-center">
+          <div className="mt-4 h-24 w-24 md:h-32 md:w-32 bg-white rounded-3xl p-4 flex items-center justify-center flex-shrink-0 shadow-2xl mb-6 md:mb-10">
             <img src={company.logo} alt="Logo" className="w-full h-full object-contain" />
           </div>
-          <h2 className="text-4xl font-black text-white uppercase italic tracking-tighter leading-tight mb-8">{company.name}</h2>
-          <span className="text-[#10b981] text-[11px] font-black uppercase tracking-[0.5em] mb-6 block italic">{company.date}</span>
-          <p className="text-slate-400 italic text-lg leading-relaxed mb-10 px-4">{company.about}</p>
-          <div className="flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-slate-500 bg-white/5 px-5 py-3 rounded-2xl border border-white/5 mx-auto">
+          <h2 className="text-2xl md:text-4xl font-black text-white uppercase italic tracking-tighter leading-tight mb-4 md:mb-8">{company.name}</h2>
+          <span className="text-[#10b981] text-[10px] md:text-[11px] font-black uppercase tracking-[0.5em] mb-4 md:mb-6 block italic">{company.date}</span>
+          <p className="text-slate-400 italic text-sm md:text-lg leading-relaxed mb-6 md:mb-10 px-4">{company.about}</p>
+          <div className="flex items-center gap-3 text-[10px] md:text-sm font-bold uppercase tracking-widest text-slate-500 bg-white/5 px-5 py-3 rounded-2xl border border-white/5 mx-auto">
             <MapPin size={18} className="text-[#10b981]"/> {company.loc}
           </div>
         </div>
 
-        <div className="w-full md:w-2/3 h-full relative">
+        {/* --- RIGHT SECTION (MEDIA) --- */}
+        <div className="w-full h-1/2 md:h-full md:w-2/3 relative">
           <ModalMediaGallery items={mediaItems} />
         </div>
       </motion.div>
