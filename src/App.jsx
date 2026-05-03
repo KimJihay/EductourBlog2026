@@ -189,7 +189,15 @@ const ModalMediaGallery = ({ items }) => {
           className="w-full h-full flex items-center justify-center"
         >
           {current.type === 'video' ? (
-            <video muted autoPlay loop key={current.src} className="max-w-full max-h-full object-contain">
+            <video 
+              muted 
+              autoPlay 
+              loop 
+              playsInline 
+              webkit-playsinline="true" 
+              key={current.src} 
+              className="max-w-full max-h-full object-contain"
+            >
               <source src={current.src} type="video/mp4" />
             </video>
           ) : (
@@ -198,11 +206,18 @@ const ModalMediaGallery = ({ items }) => {
         </motion.div>
       </AnimatePresence>
 
-      <button onClick={prev} className="absolute left-6 z-30 p-4 rounded-full bg-black/40 text-white hover:text-[#10b981] backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-auto">
-        <ArrowLeft size={32} />
+      {/* RESTORED NAVIGATION BUTTONS */}
+      <button 
+        onClick={prev} 
+        className="absolute left-4 md:left-6 z-[130] p-3 md:p-4 rounded-full bg-black/50 text-white hover:text-[#10b981] backdrop-blur-md opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity border border-white/10"
+      >
+        <ArrowLeft size={24} />
       </button>
-      <button onClick={next} className="absolute right-6 z-30 p-4 rounded-full bg-black/40 text-white hover:text-[#10b981] backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-auto">
-        <ArrowRight size={32} />
+      <button 
+        onClick={next} 
+        className="absolute right-4 md:right-6 z-[130] p-3 md:p-4 rounded-full bg-black/50 text-white hover:text-[#10b981] backdrop-blur-md opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity border border-white/10"
+      >
+        <ArrowRight size={24} />
       </button>
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-30">
@@ -229,8 +244,7 @@ const CompanyModal = ({ company, onClose }) => {
         initial={{ scale: 0.95, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.95, y: 20 }}
         className="relative w-full max-w-7xl h-full max-h-[85vh] bg-zinc-900 border border-white/10 rounded-[3rem] overflow-hidden flex flex-col md:flex-row shadow-2xl"
       >
-        {/* FIX FOR IMAGE_F01755.JPG: Solid Close Button Overlay */}
-        <button onClick={onClose} className="absolute top-6 right-6 md:top-8 md:right-8 z-[120] bg-black/80 p-4 rounded-full text-white hover:text-[#10b981] transition-all backdrop-blur-xl border border-white/20 shadow-2xl">
+        <button onClick={onClose} className="absolute top-6 right-6 md:top-8 md:right-8 z-[140] bg-black/80 p-4 rounded-full text-white hover:text-[#10b981] transition-all backdrop-blur-xl border border-white/20 shadow-2xl">
           <X size={28} />
         </button>
 
@@ -263,7 +277,6 @@ export default function App() {
   const [isMuted, setIsMuted] = useState(false);
   const audioRef = useRef(null);
 
-  // FIX FOR IMAGE_F01755.JPG: Lock body scroll when modal is open
   useEffect(() => {
     if (selectedCompany || zoomedMedia) {
       document.body.classList.add('modal-open');
@@ -296,7 +309,6 @@ export default function App() {
 
       {activeTab === 'about' ? <PhotoCollageBackground /> : <MeshBackground />}
 
-      {/* FIX FOR IMAGE_F07FB7.JPG: Responsive Navigation */}
       <nav className="fixed top-0 left-0 w-full z-50 bg-black/60 backdrop-blur-2xl border-b border-white/10 md:top-8 md:left-1/2 md:-translate-x-1/2 md:w-auto md:rounded-full md:border md:px-8 shadow-2xl">
         <div className="flex overflow-x-auto no-scrollbar items-center px-4 py-4 gap-6 md:gap-8 md:px-0">
           {[
@@ -336,7 +348,7 @@ export default function App() {
           >
              <button className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors"><X size={40} /></button>
              {zoomedMedia.type === 'video' ? (
-               <video muted autoPlay loop className="max-w-full max-h-full rounded-2xl shadow-2xl">
+               <video muted autoPlay loop playsInline webkit-playsinline="true" className="max-w-full max-h-full rounded-2xl shadow-2xl">
                  <source src={zoomedMedia.src} type="video/mp4" />
                </video>
              ) : (
