@@ -286,20 +286,26 @@ export default function App() {
 
       {activeTab === 'about' ? <PhotoCollageBackground /> : <MeshBackground />}
 
-      <nav className="fixed top-8 left-1/2 -translate-x-1/2 z-50 bg-white/5 backdrop-blur-2xl border border-white/10 px-8 py-4 rounded-full flex gap-8 items-center shadow-2xl">
-        {[
-          { id: 'about', label: 'About', icon: <Home size={14}/> },
-          { id: 'destinations', label: 'Destinations', icon: <MapPin size={14}/> },
-          { id: 'gallery', label: 'Gallery', icon: <ImageIcon size={14}/> },
-          { id: 'acknowledgement', label: 'Acknowledgement', icon: <Heart size={14}/> }
-        ].map(tab => (
-          <button 
-            key={tab.id} onClick={() => setActiveTab(tab.id)}
-            className={`flex items-center gap-2 text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === tab.id ? 'text-[#10b981]' : 'text-slate-400 hover:text-white'}`}
-          >
-            {tab.icon} {tab.label}
-          </button>
-        ))}
+      {/* --- NAVIGATION FIXED FOR MOBILE --- */}
+      <nav className="fixed top-0 left-0 w-full z-50 bg-black/60 backdrop-blur-2xl border-b border-white/10 md:top-8 md:left-1/2 md:-translate-x-1/2 md:w-auto md:rounded-full md:border md:px-8 shadow-2xl">
+        <div className="flex overflow-x-auto no-scrollbar items-center px-4 py-4 gap-6 md:gap-8 md:px-0">
+          {[
+            { id: 'about', label: 'About', icon: <Home size={14}/> },
+            { id: 'destinations', label: 'Destinations', icon: <MapPin size={14}/> },
+            { id: 'gallery', label: 'Gallery', icon: <ImageIcon size={14}/> },
+            { id: 'acknowledgement', label: 'Acknowledgement', icon: <Heart size={14}/> }
+          ].map(tab => (
+            <button 
+              key={tab.id} 
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex items-center gap-2 text-[10px] font-black uppercase tracking-widest transition-all whitespace-nowrap flex-shrink-0 ${
+                activeTab === tab.id ? 'text-[#10b981]' : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              {tab.icon} {tab.label}
+            </button>
+          ))}
+        </div>
       </nav>
 
       {audioStarted && (
@@ -334,23 +340,23 @@ export default function App() {
 
       <AnimatePresence mode="wait">
         {activeTab === 'about' && (
-          <motion.div key="about" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="pt-40 pb-20 px-6 max-w-4xl mx-auto text-center relative z-20">
+          <motion.div key="about" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="pt-32 md:pt-40 pb-20 px-6 max-w-4xl mx-auto text-center relative z-20">
             <div className="flex justify-center items-center gap-8 mb-10">
-              <img src="/tour/WMSU.png" alt="WMSU Logo" className="h-20 w-auto drop-shadow-2xl" />
-              <img src="/tour/CCS Seal.png" alt="CCS Seal" className="h-20 w-auto drop-shadow-2xl" />
+              <img src="/tour/WMSU.png" alt="WMSU Logo" className="h-16 md:h-20 w-auto drop-shadow-2xl" />
+              <img src="/tour/CCS Seal.png" alt="CCS Seal" className="h-16 md:h-20 w-auto drop-shadow-2xl" />
             </div>
-            <span className="text-[#10b981] font-black uppercase tracking-[0.8em] text-[12px] md:text-[14px] block mb-8 italic">WMSU - BSIT Industry Visit Blog</span>
-            <h1 className="text-6xl md:text-[8.5rem] font-black uppercase italic leading-[0.8] mb-12 tracking-tighter drop-shadow-2xl">
+            <span className="text-[#10b981] font-black uppercase tracking-[0.5em] md:tracking-[0.8em] text-[10px] md:text-[14px] block mb-8 italic">WMSU - BSIT Industry Visit Blog</span>
+            <h1 className="text-5xl md:text-[8.5rem] font-black uppercase italic leading-[0.8] mb-12 tracking-tighter drop-shadow-2xl">
               <span className="text-white">LUZON</span> <br /> <span className="text-[#10b981]">2026</span>
             </h1>
-            <p className="text-xl md:text-2xl text-slate-200 leading-relaxed italic mb-12 drop-shadow-lg max-w-2xl mx-auto">An 8-day educational tour exploring the technology landscape of the Philippines.</p>
+            <p className="text-lg md:text-2xl text-slate-200 leading-relaxed italic mb-12 drop-shadow-lg max-w-2xl mx-auto">An 8-day educational tour exploring the technology landscape of the Philippines.</p>
             <button onClick={() => setActiveTab('destinations')} className="group flex items-center gap-4 mx-auto text-[#10b981] font-black uppercase tracking-widest text-sm bg-black/40 backdrop-blur-md px-8 py-4 rounded-full border border-[#10b981]/30 hover:bg-[#10b981]/10 transition-all pointer-events-auto">Discover Destinations <ArrowRight size={18}/></button>
           </motion.div>
         )}
 
         {activeTab === 'destinations' && (
-          <motion.div key="destinations" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-40 pb-40 px-6 max-w-6xl mx-auto relative z-20">
-            <h2 className="text-5xl font-black text-white uppercase italic mb-16 tracking-tighter">TOUR <span className="text-[#10b981]">DESTINATIONS</span></h2>
+          <motion.div key="destinations" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-32 md:pt-40 pb-40 px-6 max-w-6xl mx-auto relative z-20">
+            <h2 className="text-4xl md:text-5xl font-black text-white uppercase italic mb-16 tracking-tighter">TOUR <span className="text-[#10b981]">DESTINATIONS</span></h2>
             <div className="grid md:grid-cols-3 gap-6">
               {tourData.map(co => (
                 <motion.div key={co.id} onClick={() => setSelectedCompany(co)} whileHover={{ y: -10 }} className="p-8 rounded-[3rem] bg-zinc-900/50 border border-white/10 backdrop-blur-xl cursor-pointer group flex flex-col items-center text-center">
@@ -364,7 +370,7 @@ export default function App() {
         )}
 
         {activeTab === 'gallery' && (
-          <motion.div key="gallery" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-40 pb-40 px-6 max-w-7xl mx-auto relative z-20">
+          <motion.div key="gallery" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-32 md:pt-40 pb-40 px-6 max-w-7xl mx-auto relative z-20">
             <div className="columns-1 sm:columns-2 md:columns-4 gap-6 space-y-6">
               {galleryItems.map((item, i) => (
                 <motion.div key={i} whileHover={{ scale: 1.05 }} onClick={() => setZoomedMedia(item)} className="rounded-3xl overflow-hidden border border-white/10 bg-zinc-900 cursor-pointer group shadow-xl relative">
@@ -393,10 +399,10 @@ export default function App() {
             initial={{ opacity: 0, y: 20 }} 
             animate={{ opacity: 1, y: 0 }} 
             exit={{ opacity: 0 }} 
-            className="pt-40 pb-40 px-6 max-w-4xl mx-auto relative z-20 text-center"
+            className="pt-32 md:pt-40 pb-40 px-6 max-w-4xl mx-auto relative z-20 text-center"
           >
-            <h2 className="text-5xl font-black text-white uppercase italic tracking-tighter mb-16">OUR <span className="text-[#10b981]">ACKNOWLEDGEMENT</span></h2>
-            <div className="space-y-10 text-xl text-slate-300 italic leading-relaxed">
+            <h2 className="text-4xl md:text-5xl font-black text-white uppercase italic tracking-tighter mb-16">OUR <span className="text-[#10b981]">ACKNOWLEDGEMENT</span></h2>
+            <div className="space-y-10 text-lg md:text-xl text-slate-300 italic leading-relaxed">
               <p>
                 Our deepest appreciation goes to University President <span className="text-white font-bold">Dr. Ma. Carla A. Ochotorena</span> and CCS Dean <span className="text-white font-bold">Mark Flores</span>. Their approval and belief in the value of outside-the-classroom learning made this entire educational tour possible, allowing us to see the actual scale of the industry we are about to enter.
               </p>

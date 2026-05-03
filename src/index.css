@@ -17,3 +17,19 @@ body {
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
+
+/* Custom Scrollbar Hide for Nav */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Base image styling */
+img {
+  user-select: none;
+  -webkit-user-drag: none;
+}
